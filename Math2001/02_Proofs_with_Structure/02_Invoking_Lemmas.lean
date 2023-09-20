@@ -6,6 +6,7 @@ import Library.Tactic.Extra
 
 attribute [-instance] Int.instDivInt_1 Int.instDivInt EuclideanDomain.instDiv Nat.instDivNat
 
+-- Example 2.2.1
 example {x : ℚ} (hx : 3 * x = 2) : x ≠ 1 := by
   apply ne_of_lt
   calc

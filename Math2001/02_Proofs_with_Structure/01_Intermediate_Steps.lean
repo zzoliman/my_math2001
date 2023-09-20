@@ -15,13 +15,21 @@ example {a b : ℝ} (h1 : a - 5 * b = 4) (h2 : b + 2 = 3) : a = 9 := by
     _ = 4 + 5 * 1 := by rw [h1, hb]
     _ = 9 := by ring
 
+-- JI
+example {a b : ℝ} (h1 : a - 5 * b = 4) (h2 : b + 2 = 3) : a = 9 := by
+  have hb : b = 1 := by addarith [h2]
+  calc -- therefore
+    a = a - 5 * b + 5 * b := by ring
+    _ = 4 + 5 * 1 := by rw [h1, hb]
+    _ = 9 := by ring
 
+-- Example 2.1.2
 example {m n : ℤ} (h1 : m + 3 ≤ 2 * n - 1) (h2 : n ≤ 5) : m ≤ 6 := by
   have h3 :=
   calc
     m + 3 ≤ 2 * n - 1 := by rel [h1]
     _ ≤ 2 * 5 - 1 := by rel [h2]
-    _ = 9 := by numbers
+    _ = 9 := by numbers -- proves numeric facts
   addarith [h3]
 
 

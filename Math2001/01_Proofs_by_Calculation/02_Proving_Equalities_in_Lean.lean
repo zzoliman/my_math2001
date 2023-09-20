@@ -10,8 +10,11 @@ https://hrmacbeth.github.io/math2001/01_Proofs_by_Calculation.html#proving-equal
 
 I recommend splitting your screen to display the code and the lecture notes side by side! -/
 
-
 -- Example 1.2.1
+-- `{a b : ℚ}` : sets up two variables a and b whose type is a ℚ
+-- `The code (h1 : a - b = 4) (h2 : a * b = 1)` sets up two hypotheses
+-- hypotheses in Lean have names, so that we can refer back to them later.
+-- after the colon (:), comes the goal
 example {a b : ℚ} (h1 : a - b = 4) (h2 : a * b = 1) : (a + b) ^ 2 = 20 :=
   calc
     (a + b) ^ 2 = (a - b) ^ 2 + 4 * (a * b) := by ring
@@ -22,10 +25,10 @@ example {a b : ℚ} (h1 : a - b = 4) (h2 : a * b = 1) : (a + b) ^ 2 = 20 :=
 -- Exercise: replace the words "sorry" with the correct Lean justification.
 example {r s : ℝ} (h1 : s = 3) (h2 : r + 2 * s = -1) : r = -7 :=
   calc
-    r = r + 2 * s - 2 * s := by sorry
-    _ = -1 - 2 * s := by sorry
-    _ = -1 - 2 * 3 := by sorry
-    _ = -7 := by sorry
+    r = r + 2 * s - 2 * s := by ring
+    _ = -1 - 2 * s := by rw [h2]
+    _ = -1 - 2 * 3 := by rw [h1]
+    _ = -7 := by ring
 
 -- Example 1.2.3
 -- Exercise: replace the words "sorry" with the correct Lean justification.
@@ -42,3 +45,4 @@ example {a b m n : ℤ} (h1 : a * m + b * n = 1) (h2 : b ^ 2 = 2 * a ^ 2) :
 example {a b c d e f : ℤ} (h1 : a * d = b * c) (h2 : c * f = d * e) :
     d * (a * f - b * e) = 0 :=
   sorry
+
