@@ -49,8 +49,7 @@ example {u v x y A B : ℝ} (h1 : 0 < A) (h2 : A ≤ 1) (h3 : 1 ≤ B) (h4 : x �
 -- Aaron
 example {t : ℚ} (ht : t ≥ 10) : t ^ 2 - 3 * t - 17 ≥ 5 :=
   calc
-    t ^ 2 - 3 * t - 17
-      = t * t - 3 * t - 17 := by ring
+    t ^ 2 - 3 * t - 17 = t * t - 3 * t - 17 := by ring
     _ ≥ 10 * t - 3 * t - 17 := by rel [ht] -- substitute one of the t
     _ = 7 * t - 17 := by ring
     _ ≥ 7 * 10 - 17 := by rel [ht]
