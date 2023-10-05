@@ -16,7 +16,7 @@ example {a : ℚ} (h : ∃ b : ℚ, a = b ^ 2 + 1) : a > 0 := by
     a = b ^ 2 + 1 := hb
     _ > 0 := by extra
 
-
+-- 2.5.2
 example {t : ℝ} (h : ∃ a : ℝ, a * t < 0) : t ≠ 0 := by
   obtain ⟨x, hxt⟩ := h
   have H := le_or_gt x 0

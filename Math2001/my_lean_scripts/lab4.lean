@@ -19,10 +19,11 @@ example {x : ℚ} (hx : 3 * x = 2) : x ≠ 1 := by
     _ < 1 := by numbers
 
 example {y : ℝ} : y ^ 2 + 1 ≠ 0 := by
-  sorry
+  apply ne_of_gt
+  extra
 
 example {a b : ℝ} (h1 : a ^ 2 + b ^ 2 = 0) : a ^ 2 = 0 := by
-  apply le_antisymm
+  apply le_antisymm -- less of equal is anti symmetric
   calc
     a ^ 2 ≤ a ^ 2 + b ^ 2 := by extra
     _ = 0 := h1
@@ -31,7 +32,14 @@ example {a b : ℝ} (h1 : a ^ 2 + b ^ 2 = 0) : a ^ 2 = 0 := by
 /-! # Exercises -/
 
 example {m : ℤ} (hm : m + 1 = 5) : 3 * m ≠ 6 := by
-  sorry
+  have m_4 : m = 4 :=
+  calc
+    m = m + 1 - 1 := by ring
+    _ = 5 - 1 := by rw [hm]
+    _ = 4 := by numbers
+  apply ne_of_gt -- 이 줄은 없어도 됨
+  rw [m_4]
+  numbers
 
 /-! # Section 2.5 -/
 
@@ -50,7 +58,8 @@ example (x : ℝ) : ∃ y : ℝ, y > x := by
   extra
 
 example : ∃ m n : ℤ, m ^ 2 - n ^ 2 = 11 := by
-  sorry
+  use 6, 5
+  numbers
 
 example : ∃ a b c d : ℕ,
     a ^ 3 + b ^ 3 = 1729 ∧ c ^ 3 + d ^ 3 = 1729 ∧ a ≠ c ∧ a ≠ d := by
@@ -66,9 +75,12 @@ example : ∃ a b c d : ℕ,
 /-! # Exercises -/
 
 example : ∃ t : ℚ, t ^ 2 = 1.69 := by
-  sorry
+  use 1.3
+  numbers
+  
 example : ∃ m n : ℤ, m ^ 2 + n ^ 2 = 85 := by
-  sorry
+  use 2, 9
+  numbers
 
 example : ∃ x : ℝ, x < 0 ∧ x ^ 2 < 1 := by
   sorry
