@@ -29,19 +29,34 @@ example {n : ℤ} : 7 ∣ n ∧ 11 ∣ n → 77 ∣ n := by
     _ = 22 * (7 * a) - 21 * (11 * b) := by rw[hb]
     _ = 77 * (2 * a - 3 * b) := by ring
 
+
 /- Showing ∃! -/
-  example : ∃! a : ℝ , 3 * a + 1 = 7 := by 
-    use 2
-    simp
-    constructor
-    · numbers
-    · intros y h
-      have h' : 3 * y = 3 * 2 :=
-      calc
-        3 * y = 3 * y + 1 - 1 := by ring
-        _ = 7 - 1 := by rw [h]
-        _ = 3 * 2 := by numbers
-      cancel 3 at h'
+example : ∃! a : ℝ , 3 * a + 1 = 7 := by 
+  use 2
+  simp
+  constructor
+  · numbers
+  · intros y h
+    have h' : 3 * y = 3 * 2 :=
+    calc
+      3 * y = 3 * y + 1 - 1 := by ring
+      _ = 7 - 1 := by rw [h]
+      _ = 3 * 2 := by numbers
+    cancel 3 at h'
+
+/- Showing ∃! -/
+-- zzoli version
+example : ∃! a : ℝ , 3 * a + 1 = 7 := by 
+  use 2
+  simp
+  constructor
+  · numbers
+  · intros y h
+    calc
+      y = ((3 * y + 1) - 1) / 3 := by ring
+      _= (7 - 1) / 3 := by rw [h]
+      _ = 2 := by ring
+
 
 /- Using ∃! -/
 example {x : ℚ} (hx : ∃! a : ℚ, a ^ 2 = x) : x = 0 := by
