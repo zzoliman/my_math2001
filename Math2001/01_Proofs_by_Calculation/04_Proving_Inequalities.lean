@@ -9,6 +9,8 @@ attribute [-instance] Int.instDivInt_1 Int.instDivInt EuclideanDomain.instDiv Na
 
 
 -- Example 1.4.1
+-- “Substitution”-like steps are justified with a tactic `rel` indicating the inequality being “substituted” – but note that if you try to use this in a situation when there is no rule about preservation/reversal of inequalities under the relevant operations, then it will fail.
+-- “Numeric facts” are justified with the tactic `numbers`. (This tactic can also justify “numeric facts” about equalities, like 4 ^ 2 + 4 * 1 = 20, for which we have previously used the `ring` tactic.)
 example {x y : ℤ} (hx : x + 3 ≤ 2) (hy : y + 2 * x ≥ 3) : y > 3 :=
   calc
     y = y + 2 * x - 2 * x := by ring
@@ -25,6 +27,7 @@ example {r s : ℚ} (h1 : s + 3 ≥ r) (h2 : s + r ≤ 3) : r ≤ 3 :=
     _ ≤ (3 + (s + 3) - s) / 2 := by rel [h1, h2]
     _ = 3 := by ring
 
+-- ==========================================================================
 -- Example 1.4.3
 -- Exercise: type out the whole proof printed in the text as a Lean proof.
 example {x y : ℝ} (h1 : y ≤ x + 5) (h2 : x ≤ -2) : x + y < 2 :=
@@ -44,9 +47,10 @@ example {u v x y A B : ℝ} (h1 : 0 < A) (h2 : A ≤ 1) (h3 : 1 ≤ B) (h4 : x �
     _ < A * B + A * B + B * A := by sorry
     _ = 3 * A * B := by sorry
 
+-- ==========================================================================
 -- Example 1.4.5
 -- Exercise: replace the words "sorry" with the correct Lean justification.
--- Aaron
+-- `numbers`
 example {t : ℚ} (ht : t ≥ 10) : t ^ 2 - 3 * t - 17 ≥ 5 :=
   calc
     t ^ 2 - 3 * t - 17 = t * t - 3 * t - 17 := by ring
@@ -55,9 +59,10 @@ example {t : ℚ} (ht : t ≥ 10) : t ^ 2 - 3 * t - 17 ≥ 5 :=
     _ ≥ 7 * 10 - 17 := by rel [ht]
     _ ≥ 5 := by numbers
 
+-- ==========================================================================
 -- Example 1.4.6
 -- Exercise: type out the whole proof printed in the text as a Lean proof.
--- Aaron
+-- `extra`
 example {n : ℤ} (hn : n ≥ 5) : n ^ 2 > 2 * n + 11 :=
   calc
     n ^ 2 = n * n := by ring
@@ -69,9 +74,10 @@ example {n : ℤ} (hn : n ≥ 5) : n ^ 2 > 2 * n + 11 :=
     
 
 -- Example 1.4.7
+-- `extra`
 example {m n : ℤ} (h : m ^ 2 + n ≤ 2) : n ≤ 2 :=
   calc
-    n ≤ m ^ 2 + n := by extra -- square?
+    n ≤ m ^ 2 + n := by extra
     _ ≤ 2 := by rel [h]
 
 

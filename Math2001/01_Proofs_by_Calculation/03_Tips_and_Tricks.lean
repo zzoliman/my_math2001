@@ -8,6 +8,9 @@ attribute [-instance] Int.instDivInt_1 Int.instDivInt EuclideanDomain.instDiv Na
 Exercise: choose some of these examples and type out the whole proofs printed in the text as Lean
 proofs. -/
 
+/-
+In this section we will cover some tips and tricks for actually coming up with a proof by calculation.
+-/
 
 -- Example 1.3.1
 -- Exercise: replace the words "sorry" with the correct Lean justification.
@@ -20,6 +23,7 @@ example {a b : ℤ} (h1 : a = 2 * b + 5) (h2 : b = 3) : a = 11 :=
 
 -- Example 1.3.2
 -- Exercise: replace the words "sorry" with the correct Lean justification.
+-- `we create ab x+4 in our goal` by adding and substracting 4 from x
 example {x : ℤ} (h1 : x + 4 = 2) : x = -2 :=
   calc
     x = (x + 4) - 4 := by ring
@@ -29,6 +33,8 @@ example {x : ℤ} (h1 : x + 4 = 2) : x = -2 :=
 
 -- Example 1.3.3
 -- Exercise: replace the words "sorry" with the correct Lean justification.
+-- Sometimes we need to perform this process, of “creating” one side of a hypothesis inside the goal, more than once.
+
 example {a b : ℝ} (h1 : a - 5 * b = 4) (h2 : b + 2 = 3) : a = 9 :=
   calc
     a = (a - 5 * b) + 5 * b := by ring
@@ -38,13 +44,20 @@ example {a b : ℝ} (h1 : a - 5 * b = 4) (h2 : b + 2 = 3) : a = 9 :=
     _ = 9 := by ring
 
 -- Example 1.3.4
+-- We might need to use both addition/subtraction and multiplication/division to “create” one side of the hypothesis.
 example {w : ℚ} (h1 : 3 * w + 1 = 4) : w = 1 :=
-  sorry
+  calc
+    w = ((3 * w + 1) - 1) / 3 := by ring
+    _ = (4 - 1) / 3 := by rw [h1]
+    _ = 1 := by ring
 
+-- ==========================================================================
 -- Example 1.3.5
 example {x : ℤ} (h1 : 2 * x + 3 = x) : x = -3 :=
   sorry
 
+
+-- ==========================================================================
 -- Example 1.3.6
 example {x y : ℤ} (h1 : 2 * x - y = 4) (h2 : y - x + 1 = 2) : x = 5 :=
   sorry

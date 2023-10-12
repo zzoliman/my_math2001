@@ -14,11 +14,36 @@ attribute [-instance] Int.instDivInt_1 Int.instDivInt Nat.instDivNat
 
 /- 3.1 -/
 
+-- added by TF
+example {a : ℝ} (h : ∀ x, a ≤ x ^ 2 - 2 * x ) : a ≤ -1 := by
+  specialize h 1
+  calc
+    a <= 1 ^ 2 - 2 * 1 := h
+    _ = -1 := by ring
+example {a : ℝ} (h : ∀ x, a ≤ x ^ 2 - 2 * x ) : a ≤ -1 :=
+  calc
+    a <= 1 ^ 2 - 2 * 1 := h 1
+    _ = -1 := by ring
+
 example : Odd (-9 : ℤ) := by
-  sorry
+  use -5
+  simp
 
 example : Even (26 : ℤ) := by
-  sorry
+  use 13
+  simp
+
+-- Added by TF
+
+example {x : ℝ} (h : x ^ 2 + x - 6 = 0) : x = -3 ∨ x = 2 :=  
+  have H : (x - 3) * (x + 2) = 0 :=
+  calc
+    (x + 3) * (x - 2) = (x ^ 2 + x - 6) := by ring
+    _ = 0 := by rw [h]
+
+example {x : ℝ} (h : x ^ 2 + x - 6 = 0) : x = -3 ∨ x = 2 := by
+  left
+  right
 
 example {m n : ℤ} (hm : Odd m) (hn : Even n) : Odd (n + m) := by
   sorry

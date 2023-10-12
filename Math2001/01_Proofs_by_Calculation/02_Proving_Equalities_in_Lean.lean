@@ -11,10 +11,13 @@ https://hrmacbeth.github.io/math2001/01_Proofs_by_Calculation.html#proving-equal
 I recommend splitting your screen to display the code and the lecture notes side by side! -/
 
 -- Example 1.2.1
--- `{a b : ℚ}` : sets up two variables a and b whose type is a ℚ
+-- `{a b : ℚ}` : sets up two variables a and b whose type is ℚ
 -- `The code (h1 : a - b = 4) (h2 : a * b = 1)` sets up two hypotheses
 -- hypotheses in Lean have names, so that we can refer back to them later.
--- after the colon (:), comes the goal
+-- after the colon (:), comes the goal, the statement we have been asked to prove.
+-- in Lean, an algebraic rearrangement is indicated by the tactic `ring`
+-- a substitution is indicated by the tactic `rw` (stands for rewrite)
+  -- when making a substitution, you must indicate by name the hypotheses which you are substituting
 example {a b : ℚ} (h1 : a - b = 4) (h2 : a * b = 1) : (a + b) ^ 2 = 20 :=
   calc
     (a + b) ^ 2 = (a - b) ^ 2 + 4 * (a * b) := by ring

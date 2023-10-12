@@ -10,16 +10,19 @@ attribute [-instance] Int.instDivInt_1 Int.instDivInt Nat.instDivNat
 
 open Int
 
-
+--3.1.1
 example : Odd (7 : ℤ) := by
   dsimp [Odd]
   use 3
   numbers
 
-
+--3.1.2
 example : Odd (-3 : ℤ) := by
-  sorry
+  dsimp [Odd]
+  use -2
+  numbers
 
+-- 3.1.3
 example {n : ℤ} (hn : Odd n) : Odd (3 * n + 2) := by
   dsimp [Odd] at *
   obtain ⟨k, hk⟩ := hn
@@ -29,8 +32,21 @@ example {n : ℤ} (hn : Odd n) : Odd (3 * n + 2) := by
     _ = 2 * (3 * k + 2) + 1 := by ring
 
 
+example {n : ℤ} (hn : Odd n) : Odd (3 * n + 2) := by
+  dsimp [Odd] at hn
+
+example {n : ℤ} (hn : Odd n) : Odd (3 * n + 2) := by
+  dsimp [Odd]
+
+--3.1.4
 example {n : ℤ} (hn : Odd n) : Odd (7 * n - 4) := by
-  sorry
+  dsimp [Odd] at *
+  obtain ⟨k, hk⟩ := hn
+  use 7 * k + 1
+  calc
+    7 * n - 4 = 7 * (2 * k + 1) - 4 := by rw [hk]
+    _ = 2 * (7 * k + 1) + 1 := by ring
+
 
 example {x y : ℤ} (hx : Odd x) (hy : Odd y) : Odd (x + y + 1) := by
   obtain ⟨a, ha⟩ := hx
