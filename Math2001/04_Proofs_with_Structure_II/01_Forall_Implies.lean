@@ -89,6 +89,7 @@ example {a : ℚ} (h : ∀ b : ℚ, a ≥ -3 + 4 * b - b ^ 2) : a ≥ 1 :=
 example {n : ℤ} (hn : ∀ m, 1 ≤ m → m ≤ 5 → m ∣ n) : 15 ∣ n := by
   sorry
 
+-- 3. Show that there exists a natural number n such that every natural number m is at least n.
 example : ∃ n : ℕ, ∀ m : ℕ, n ≤ m := by
   sorry
 
