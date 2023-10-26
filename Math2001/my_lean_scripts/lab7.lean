@@ -14,7 +14,10 @@ import Library.Tactic.Use
 
 example {P Q : Prop} (h : P ∧ Q) : P ∨ Q := by sorry 
 
-example {P Q R : Prop} (h1 : P → Q) (h2 : P → R) (h3 : P) : Q ∧ R := by sorry 
+example {P Q R : Prop} (h1 : P → Q) (h2 : P → R) (h3 : P) : Q ∧ R := by
+  have hq : Q := h1 h3
+  have hr : R := h2 h3
+  apply And.intro hq hr
 
 example (P : Prop) : ¬(P ∧ ¬ P) := by sorry 
 
@@ -98,4 +101,29 @@ example {P : Prop} (hP : ¬¬P) : P := by
 
 /- 5.2 Exercises -/
 
-example (P Q : Prop) : (¬P → ¬Q) ↔ (Q → P) := by sorry
+-- contrapositive
+example (P Q : Prop) : (¬P → ¬Q) ↔ (Q → P) := by
+  constructor
+  · intros h hq
+    by_cases c : P
+    · apply c
+    · have np : ¬Q := h c
+      contradiction
+  · intros h np
+    intros hq
+    have p : P := h hq
+    contradiction
+
+-- Aaron
+lemma tribalanced_zero : Tribalanced 0 := by
+  dsimp [Tribalanced]
+  intros n
+  simp
+  numbers
+
+lemma not_tribalanced_two : ¬ Tribalanced 2 := by
+  dsimp [Tribalanced]
+  simp
+  use 2
+  simp
+  numbers
