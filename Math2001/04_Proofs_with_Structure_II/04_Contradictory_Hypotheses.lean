@@ -15,7 +15,7 @@ import Library.Tactic.Use
 attribute [-instance] Int.instDivInt_1 Int.instDivInt EuclideanDomain.instDiv Nat.instDivNat
 attribute [-simp] Nat.not_two_dvd_bit1 two_dvd_bit0
 
-
+-- 4.4.1
 example {y : ℝ} (x : ℝ) (h : 0 < x * y) (hx : 0 ≤ x) : 0 < y := by
   obtain hneg | hpos : y ≤ 0 ∨ 0 < y := le_or_lt y 0
   · -- the case `y ≤ 0`

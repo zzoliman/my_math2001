@@ -55,7 +55,7 @@ example (n : ℕ) : 4 ^ n ≡ 1 [ZMOD 15] ∨ 4 ^ n ≡ 4 [ZMOD 15] := by
         _ = 15 * 1 + 1 := by numbers
         _ ≡ 1 [ZMOD 15] := by extra
 
-
+-- 6.1.5 Example
 example {n : ℕ} (hn : 2 ≤ n) : (3:ℤ) ^ n ≥ 2 ^ n + 5 := by
   induction_from_starting_point n, hn with k hk IH
   · -- base case

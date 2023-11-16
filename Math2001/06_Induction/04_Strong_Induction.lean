@@ -41,6 +41,7 @@ theorem F_bound (n : ℕ) : F n ≤ 2 ^ n := by
 
 namespace Nat
 
+-- 6.4.2
 theorem exists_prime_factor {n : ℕ} (hn2 : 2 ≤ n) : ∃ p : ℕ, Prime p ∧ p ∣ n := by
   by_cases hn : Prime n 
   . -- case 1: `n` is prime

@@ -39,7 +39,7 @@ example (n : ℕ) : Odd (b n) := by
       _ = (2 * x + 1) ^ 2 - 2 := by rw [hx]
       _ = 2 * (2 * x ^ 2 + 2 * x - 1) + 1 := by ring
 
-
+-- 6.2.2 Example
 def x : ℕ → ℤ 
   | 0 => 5
   | n + 1 => 2 * x n - 1
@@ -48,9 +48,21 @@ def x : ℕ → ℤ
 example (n : ℕ) : x n ≡ 1 [ZMOD 4] := by
   simple_induction n with k IH
   · -- base case
-    sorry
+    dsimp [x]
+    use 1
+    numbers
   · -- inductive step
-    sorry
+    -- dsimp [x]
+    -- obtain ⟨a, ha⟩ := IH
+    -- have ha2 : x k = 4 * a + 1 := by addarith [ha]
+    -- calc
+      -- 2 * x (k + 0) - 1 = 2 * x k - 1 := by extra
+      _ = 2 * ((4 * a) + 1) - 1 := by rw [ha2]
+      -- _ = 8 * a + 1 := by ring
+      -- _ = 4 * (2 * a) + 1 := by ring
+    
+
+
 
 example (n : ℕ) : x n = 2 ^ (n + 2) + 1 := by
   simple_induction n with k IH
