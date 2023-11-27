@@ -16,40 +16,40 @@ open Function
 namespace Int
 
 
-def F : ℕ → ℤ 
+def F : ℕ → ℤ
   | 0 => 1
   | 1 => 1
-  | n + 2 => F (n + 1) + F n 
+  | n + 2 => F (n + 1) + F n
 
-#eval F 5 -- infoview displays `8`  
+#eval F 5 -- infoview displays `8`
 
 
-#check @F -- infoview displays `F : ℕ → ℤ`  
+#check @F -- infoview displays `F : ℕ → ℤ`
 
 
 def q (x : ℝ) : ℝ := x + 3
 
 
-#check @q -- infoview displays `q : ℝ → ℝ`  
+#check @q -- infoview displays `q : ℝ → ℝ`
 
 
-#check fun (x : ℝ) ↦ x ^ 2 -- infoview displays `fun x ↦ x ^ 2 : ℝ → ℝ`  
+#check fun (x : ℝ) ↦ x ^ 2 -- infoview displays `fun x ↦ x ^ 2 : ℝ → ℝ`
 
-
+-- 8.1.3 Example
 example : Injective q := by
   dsimp [Injective]
   intro x1 x2 h
   dsimp [q] at h
   addarith [h]
 
-
+-- 8.1.4  Example
 example : ¬ Injective (fun x : ℝ ↦ x ^ 2) := by
   dsimp [Injective]
   push_neg
   use -1, 1
   constructor
   · numbers
-  · numbers  
+  · numbers
 
 
 def s (a : ℚ) : ℚ := 3 * a + 2
@@ -127,13 +127,13 @@ example : Injective g := by
   cases x1 <;> cases x2
   · inductive_type -- goal `⊢ athos = athos`
   · contradiction -- hypothesis `hx : g athos = g porthos`
-  · contradiction 
-  · contradiction 
-  · inductive_type 
-  · contradiction 
-  · contradiction 
-  · contradiction 
-  · inductive_type 
+  · contradiction
+  · contradiction
+  · inductive_type
+  · contradiction
+  · contradiction
+  · contradiction
+  · inductive_type
 
 
 example : Surjective g := by
@@ -145,7 +145,7 @@ example : Surjective g := by
   · use athos
     inductive_type
   · use porthos
-    inductive_type 
+    inductive_type
 
 
 
@@ -169,7 +169,7 @@ example : Injective (fun (x:ℝ) ↦ x ^ 3) := by
         _ = 0 := by numbers
       cancel 3 at hx2
       calc x1 = 0 := by rw [hx1]
-        _ = x2 := by rw [hx2]    
+        _ = x2 := by rw [hx2]
     · -- case 2b: x1 ≠ 0
       have :=
       calc 0 < x1 ^ 2 + ((x1 + x2) ^ 2 + x2 ^ 2) := by extra
@@ -251,7 +251,7 @@ example : ¬ Surjective h := by
   sorry
 
 
-def l : White → Musketeer 
+def l : White → Musketeer
   | meg => aramis
   | jack => porthos
 
